@@ -1,9 +1,3 @@
-## Extended errors
-
-### Adds the filename and line numbers to an error
-
-Example
-```go
 package main
 
 import (
@@ -35,16 +29,3 @@ func f1() error {
 func g1() error {
 	return goerror.New("error_Go1")
 }
-
-```  
-
-Output
-
-```
- E1 github.com/y4v8/errors/example/main.go:16 error_Go1
- E1 github.com/y4v8/errors/example/main.go:19
->E2 github.com/y4v8/errors/example/main.go:18 error_A1
- E1 github.com/y4v8/errors/example/main.go:22 error_Go2
- E1 github.com/y4v8/errors/example/main.go:24 error_B2
-
-```
