@@ -40,11 +40,10 @@ func main() {
 
 func fn1() (err error) {
 	defer func() {
-		err = errors.Wrap(err, errors.New("Deferred error"))
+		err = errors.Append(err, "Deferred error")
 	}()
 
-	err = errors.New("New extended error")
-	return err
+	return errors.New("New extended error")
 }
 ```
 

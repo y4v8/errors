@@ -32,12 +32,10 @@ func (e erx) Error() string {
 		x = flat[max-i]
 
 		if i == 0 {
-			buf.WriteRune('E')
+			buf.WriteString("E ")
 		} else {
-			buf.WriteString("\n+")
+			buf.WriteString("\n+ ")
 		}
-
-		buf.WriteRune(' ')
 
 		fn := runtime.FuncForPC(x.pc)
 		if fn == nil {
