@@ -1,31 +1,25 @@
 package main
 
 import (
-	goerror "errors"
+	e "errors"
 	"fmt"
 	"github.com/y4v8/errors"
 )
 
 func main() {
-	err := f1()
-	fmt.Println(err)
-}
+	var err error
 
-func f1() error {
-	eg := g1()
-	ew := errors.Wrap(eg)
+	err = e.New("New golang error")
 
-	ea := errors.New("error_A1")
-	ew = ew.Append(ea)
+	err = errors.Wrap(err)
 
-	eg = goerror.New("error_Go2")
-	ew = ew.Append(eg)
+	err = errors.Append(err, "Append text error")
 
-	ew = ew.AppendText("error_B2")
+	er2 := errors.New("New extended error")
 
-	return ew
-}
+	er3 := e.New("New golang error")
 
-func g1() error {
-	return goerror.New("error_Go1")
+	err = errors.Wrap(err, er2, er3)
+
+	fmt.Println(err.Error())
 }

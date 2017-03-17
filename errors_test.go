@@ -6,17 +6,17 @@ import (
 
 func TestTrimSourcePath(t *testing.T) {
 	cases := []struct {
-		full, trim string
+		name, path, trim string
 	}{
-		{"D:/Gowork/src/github.com/y4v8/test/main.go", "github.com/y4v8/test/main.go" },
-		{"D:/Gowork/sRc/github.com/y4v8/test/main.go", "github.com/y4v8/test/main.go" },
-		{"/维基百科/src/github.com/y4v8/test/main.go", "github.com/y4v8/test/main.go" },
+		{"main.main", "D:/Gowork/src/github.com/y4v8/test/main.go", "main.go"},
+		{"main.main", "D:/main.go", "main.go"},
+		{"github.com/y4v8/test/m.MyFunc", "D:/Gowork/src/github.com/y4v8/test/m/tst.go", "github.com/y4v8/test/m/tst.go"},
 	}
 
 	for _, c := range cases {
-		trim := trimSourcePath(c.full)
+		trim := trimSourcePath(c.name, c.path)
 		if trim != c.trim {
-			t.Errorf(`[%v] for [%v], want [%v]`, trim, c.full, c.trim)
+			t.Errorf(`[%v] for path=[%v], want [%v]`, trim, c.path, c.trim)
 		}
 	}
 }
