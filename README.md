@@ -1,6 +1,6 @@
 ### Extended errors
 
-#### Adds the filename and line numbers to errors
+#### Adding a file name and line number to errors.
 
 ---------------------------------------
 
@@ -23,7 +23,41 @@ Wrap returns wrapped one or more errors.
 
 ---------------------------------------
 
-### Example
+### Example 1
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/y4v8/errors"
+)
+
+func main() {
+	err := fn1()
+	fmt.Println(err.Error())
+}
+
+func fn1() (err error) {
+	defer func() {
+		err = errors.Wrap(err, errors.New("Deferred error"))
+	}()
+
+	err = errors.New("New extended error")
+	return err
+}
+```
+
+### Output
+
+```
+E main.go:18 New extended error
++ main.go:15 Deferred error
+```
+
+---------------------------------------
+
+### Example 2
 
 ```go
 package main
