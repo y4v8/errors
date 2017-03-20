@@ -40,7 +40,7 @@ import (
 
 func main() {
 	err := fn1()
-	fmt.Println(err.Error())
+	fmt.Println(err)
 }
 
 func fn1() (err error) {
@@ -67,35 +67,26 @@ E main.go:18 New extended error
 package main
 
 import (
-	e "errors"
 	"fmt"
 	"github.com/y4v8/errors"
+	"log"
 )
 
 func main() {
-	var err error
+	errors.SetPrefix("                    ")
 
-	err = e.New("New Golang error")
+	err := errors.New("NEW")
+	err = errors.Append(err, "APPEND")
+	err = errors.Wrap(err, fmt.Errorf("%v", "WRAP"))
 
-	err = errors.Wrap(err)
-
-	err = errors.Append(err, "Append text error")
-
-	er2 := errors.New("New extended error")
-
-	er3 := e.New("New Golang error")
-
-	err = errors.Wrap(err, er2, er3)
-
-	fmt.Println(err.Error())
+	log.Println(err)
 }
 ```
 
 ### Output
 
 ```
-E main.go:14 New golang error
-+ main.go:16 Append text error
-+ main.go:18 New extended error
-+ main.go:22 New golang error
+2017/03/20 18:25:49 E main.go:12 NEW
+                    + main.go:13 APPEND
+                    + main.go:14 WRAP
 ```

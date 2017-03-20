@@ -7,7 +7,7 @@ import (
 
 func main() {
 	err := fn1()
-	fmt.Println(err.Error())
+	fmt.Println(err)
 }
 
 func fn1() (err error) {
