@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var prefix string
+
 type erx struct {
 	pc     uintptr
 	error  error
@@ -34,7 +36,9 @@ func (e erx) Error() string {
 		if i == 0 {
 			buf.WriteString("E ")
 		} else {
-			buf.WriteString("\n+ ")
+			buf.WriteString("\n")
+			buf.WriteString(prefix)
+			buf.WriteString("+ ")
 		}
 
 		fn := runtime.FuncForPC(x.pc)
@@ -108,7 +112,7 @@ func Wrap(errs ...error) error {
 
 	var x, parent *erx
 
-	loop:
+loop:
 	for _, err := range errs {
 		if err == nil {
 			continue
@@ -133,6 +137,10 @@ func Wrap(errs ...error) error {
 	}
 
 	return x
+}
+
+func SetPrefix(s string) {
+	prefix = s
 }
 
 func getPC(calldepth int) uintptr {

@@ -21,6 +21,11 @@ func Wrap(errs ...error) error
 ```
 Wrap returns wrapped one or more errors.
 
+```go
+func SetPrefix(s string)
+```
+Sets the prefix for child errors.
+
 ---------------------------------------
 
 ### Example 1
