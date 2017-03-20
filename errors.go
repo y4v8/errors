@@ -108,6 +108,7 @@ func Wrap(errs ...error) error {
 
 	var x, parent *erx
 
+	loop:
 	for _, err := range errs {
 		if err == nil {
 			continue
@@ -122,6 +123,10 @@ func Wrap(errs ...error) error {
 
 		e := x
 		for e.parent != nil {
+			if e == parent {
+				x = parent
+				continue loop
+			}
 			e = e.parent
 		}
 		e.parent = parent
