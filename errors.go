@@ -136,9 +136,14 @@ loop:
 		e.parent = parent
 	}
 
+	if x == nil {
+		return nil
+	}
+
 	return x
 }
 
+// Sets the prefix for child errors.
 func SetPrefix(s string) {
 	prefix = s
 }
