@@ -69,7 +69,7 @@ func New(text string, a ...interface{}) error {
 	if len(a) == 0 {
 		x.error = errors.New(text)
 	} else {
-		x.error = fmt.Errorf(text, a)
+		x.error = fmt.Errorf(text, a...)
 	}
 
 	return x
@@ -85,7 +85,7 @@ func Append(parent error, text string, a ...interface{}) error {
 	if len(a) == 0 {
 		err = errors.New(text)
 	} else {
-		err = fmt.Errorf(text, a)
+		err = fmt.Errorf(text, a...)
 	}
 
 	if parent == nil {
